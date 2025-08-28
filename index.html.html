@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Motors - Luxury Cars</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ff6b35;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111" width="1200" height="600"/><polygon fill="%23222" points="0,600 400,200 800,400 1200,100 1200,600"/><polygon fill="%23333" points="200,600 600,300 1000,500 1200,200 1200,600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e, #ffaa00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.3)); }
+            to { filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.6)); }
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        /* Car Grid */
+        .cars-section {
+            padding: 100px 0;
+            background: #111;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .car-card {
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+            position: relative;
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+            border-color: #ff6b35;
+        }
+
+        .car-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .car-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
+        }
+
+        .car-info {
+            padding: 1.5rem;
+        }
+
+        .car-brand {
+            color: #ff6b35;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .car-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .car-specs {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+
+        .car-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .car-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .car-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Brands Section */
+        .brands-section {
+            padding: 80px 0;
+            background: #0a0a0a;
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .brand-card {
+            background: rgba(20, 20, 20, 0.5);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #333;
+        }
+
+        .brand-card:hover {
+            background: rgba(30, 30, 30, 0.8);
+            border-color: #ff6b35;
+            transform: translateY(-5px);
+        }
+
+        .brand-logo {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #111, #222);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info h3 {
+            color: #ff6b35;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .contact-method:hover {
+            background: rgba(255, 107, 53, 0.2);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #ff6b35;
+        }
+
+        .contact-form {
+            background: rgba(20, 20, 20, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ff6b35;
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff6b35, #f7931e);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .cars-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 3D Viewer Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 1000px;
+            height: 80%;
+            background: linear-gradient(135deg, #111, #222);
+            border-radius: 20px;
+            border: 2px solid #ff6b35;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+        }
+
+        .modal-header {
+            padding: 20px;
+            background: rgba(255, 107, 53, 0.1);
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b35;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 107, 53, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .viewer-container {
+            width: 100%;
+            height: calc(100% - 80px);
+            position: relative;
+            background: radial-gradient(circle at center, #222, #111);
+        }
+
+        #car-viewer {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .viewer-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 50px;
+            border: 1px solid #333;
+        }
+
+        .control-btn {
+            padding: 10px 15px;
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid #ff6b35;
+            color: #fff;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 107, 53, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .viewer-info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #333;
+            max-width: 250px;
+        }
+
+        .viewer-info h3 {
+            color: #ff6b35;
+            margin-bottom: 10px;
+        }
+
+        .viewer-info p {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border: 3px solid #333;
+            border-top: 3px solid #ff6b35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">Elite Motors</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#cars">Cars</a></li>
+                <li><a href="#brands">Brands</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content fade-in">
+                <h1>Elite Motors</h1>
+                <p>Discover the world's finest luxury automobiles</p>
+                <a href="#cars" class="cta-button">Explore Collection</a>
+            </div>
+        </section>
+
+        <section id="cars" class="cars-section">
+            <div class="container">
+                <h2 class="section-title scroll-reveal">Premium Collection</h2>
+                <div class="cars-grid">
+                    <div class="car-card scroll-reveal">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                        <div class="car-info">
+                            <div class="car-brand">BMW</div>
+                            <h3 class="car-name">M8 Competition</h3>
+                            <div class="car-specs">
+                                <span>4.4L V8 Twin Turbo</span>
+                                <span>617 HP</span>
+                            </div>
+                            <div class="car-price">$145,000</div>
+                            <button class="car-button" onclick="contactAboutCar('BMW M8 Competition')">Inquire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="car-card scroll-reveal">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                        <div class="car-info">
+                            <div class="car-brand">Mercedes-Benz</div>
+                            <h3 class="car-name">AMG GT 63 S</h3>
+                            <div class="car-specs">
+                                <span>4.0L V8 Biturbo</span>
+                                <span>630 HP</span>
+                            </div>
+                            <div class="car-price">$158,000</div>
+                            <button class="car-button" onclick="contactAboutCar('Mercedes AMG GT 63 S')">Inquire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="car-card scroll-reveal">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2127&q=80');"></div>
+                        <div class="car-info">
+                            <div class="car-brand">Toyota</div>
+                            <h3 class="car-name">GR Supra 3.0</h3>
+                            <div class="car-specs">
+                                <span>3.0L I6 Turbo</span>
+                                <span>382 HP</span>
+                            </div>
+                            <div class="car-price">$55,000</div>
+                            <button class="car-button" onclick="contactAboutCar('Toyota GR Supra')">Inquire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="car-card scroll-reveal">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                        <div class="car-info">
+                            <div class="car-brand">Nissan</div>
+                            <h3 class="car-name">GT-R NISMO</h3>
+                            <div class="car-specs">
+                                <span>3.8L V6 Twin Turbo</span>
+                                <span>600 HP</span>
+                            </div>
+                            <div class="car-price">$215,000</div>
+                            <button class="car-button" onclick="contactAboutCar('Nissan GT-R NISMO')">Inquire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="car-card scroll-reveal">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                        <div class="car-info">
+                            <div class="car-brand">Audi</div>
+                            <h3 class="car-name">RS6 Avant</h3>
+                            <div class="car-specs">
+                                <span>4.0L V8 Twin Turbo</span>
+                                <span>591 HP</span>
+                            </div>
+                            <div class="car-price">$125,000</div>
+                            <button class="car-button" onclick="contactAboutCar('Audi RS6 Avant')">Inquire Now</button>
+                        </div>
+                    </div>
+
+                    <div class="car-card scroll-reveal">
+                        <div class="car-image" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');"></div>
+                        <div class="car-info">
+                            <div class="car-brand">Porsche</div>
+                            <h3 class="car-name">911 Turbo S</h3>
+                            <div class="car-specs">
+                                <span>3.8L Flat-6 Turbo</span>
+                                <span>640 HP</span>
+                            </div>
+                            <div class="car-price">$230,000</div>
+                            <button class="car-button" onclick="contactAboutCar('Porsche 911 Turbo S')">Inquire Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="brands" class="brands-section">
+            <div class="container">
+                <h2 class="section-title scroll-reveal">Premium Brands</h2>
+                <div class="brands-grid">
+                    <div class="brand-card scroll-reveal" onclick="open3DViewer('BMW')">
+                        <div class="brand-logo">🚗</div>
+                        <h3>BMW</h3>
+                    </div>
+                    <div class="brand-card scroll-reveal" onclick="open3DViewer('Mercedes')">
+                        <div class="brand-logo">⭐</div>
+                        <h3>Mercedes-Benz</h3>
+                    </div>
+                    <div class="brand-card scroll-reveal" onclick="open3DViewer('Audi')">
+                        <div class="brand-logo">🏁</div>
+                        <h3>Audi</h3>
+                    </div>
+                    <div class="brand-card scroll-reveal" onclick="open3DViewer('Porsche')">
+                        <div class="brand-logo">🦁</div>
+                        <h3>Porsche</h3>
+                    </div>
+                    <div class="brand-card scroll-reveal" onclick="open3DViewer('Nissan')">
+                        <div class="brand-logo">🔥</div>
+                        <h3>Nissan</h3>
+                    </div>
+                    <div class="brand-card scroll-reveal" onclick="open3DViewer('Toyota')">
+                        <div class="brand-logo">⚡</div>
+                        <h3>Toyota</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title scroll-reveal">Get In Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-info scroll-reveal">
+                        <h3>Connect With Us</h3>
+                        <p>Ready to find your dream car? Get in touch with us through your preferred method.</p>
+                        
+                        <div class="contact-methods">
+                            <a href="mailto:princedevarya@gmail.com" class="contact-method">
+                                <span class="contact-icon">📧</span>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>princedevarya@gmail.com</p>
+                                </div>
+                            </a>
+                            
+                            <a href="https://instagram.com/pkmax_4" target="_blank" class="contact-method">
+                                <span class="contact-icon">📱</span>
+                                <div>
+                                    <h4>Instagram</h4>
+                                    <p>@pkmax_4</p>
+                                </div>
+                            </a>
+
+                            <div class="contact-method">
+                                <span class="contact-icon">📍</span>
+                                <div>
+                                    <h4>Showroom</h4>
+                                    <p>Visit us for exclusive viewing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form scroll-reveal" onsubmit="handleFormSubmit(event)">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interest">Interested In</label>
+                            <select id="interest" name="interest">
+                                <option value="">Select a car</option>
+                                <option value="BMW M8 Competition">BMW M8 Competition</option>
+                                <option value="Mercedes AMG GT 63 S">Mercedes AMG GT 63 S</option>
+                                <option value="Toyota GR Supra">Toyota GR Supra</option>
+                                <option value="Nissan GT-R NISMO">Nissan GT-R NISMO</option>
+                                <option value="Audi RS6 Avant">Audi RS6 Avant</option>
+                                <option value="Porsche 911 Turbo S">Porsche 911 Turbo S</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="4" placeholder="Tell us about your requirements..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Elite Motors. All rights reserved. | Luxury Cars | Premium Service</p>
+            <p style="margin-top: 10px; color: #ff6b35; font-weight: bold;">Made by Prince Arya</p>
+        </div>
+    </footer>
+
+    <!-- 3D Viewer Modal -->
+    <div id="viewer-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-title">3D Car Viewer</h2>
+                <button class="close-btn" onclick="close3DViewer()">&times;</button>
+            </div>
+            <div class="viewer-container">
+                <div class="loading-spinner" id="loading-spinner"></div>
+                <canvas id="car-viewer"></canvas>
+                <div class="viewer-info" id="car-info">
+                    <h3 id="car-name">Loading...</h3>
+                    <p id="car-engine">Engine: Loading...</p>
+                    <p id="car-power">Power: Loading...</p>
+                    <p id="car-price">Price: Loading...</p>
+                </div>
+                <div class="viewer-controls">
+                    <button class="control-btn" onclick="resetView()">Reset View</button>
+                    <button class="control-btn" onclick="toggleAutoRotate()">Auto Rotate</button>
+                    <button class="control-btn" onclick="changeColor()">Change Color</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // 3D Viewer Variables
+        let scene, camera, renderer, car, controls;
+        let autoRotate = false;
+        let currentBrand = '';
+        
+        // Car data for different brands
+        const carData = {
+            'BMW': {
+                name: 'BMW M8 Competition',
+                engine: '4.4L V8 Twin Turbo',
+                power: '617 HP',
+                price: '$145,000',
+                color: 0x2c5aa0
+            },
+            'Mercedes': {
+                name: 'Mercedes AMG GT 63 S',
+                engine: '4.0L V8 Biturbo',
+                power: '630 HP',
+                price: '$158,000',
+                color: 0xc0c0c0
+            },
+            'Audi': {
+                name: 'Audi RS6 Avant',
+                engine: '4.0L V8 Twin Turbo',
+                power: '591 HP',
+                price: '$125,000',
+                color: 0xff0000
+            },
+            'Porsche': {
+                name: 'Porsche 911 Turbo S',
+                engine: '3.8L Flat-6 Turbo',
+                power: '640 HP',
+                price: '$230,000',
+                color: 0xffd700
+            },
+            'Nissan': {
+                name: 'Nissan GT-R NISMO',
+                engine: '3.8L V6 Twin Turbo',
+                power: '600 HP',
+                price: '$215,000',
+                color: 0x1a1a1a
+            },
+            'Toyota': {
+                name: 'Toyota GR Supra',
+                engine: '3.0L I6 Turbo',
+                power: '382 HP',
+                price: '$55,000',
+                color: 0xff6b35
+            }
+        };
+
+        // Initialize 3D Viewer
+        function init3DViewer() {
+            const canvas = document.getElementById('car-viewer');
+            const container = canvas.parentElement;
+            
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x111111);
+            
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.set(5, 3, 5);
+            
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1;
+            
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+            directionalLight.position.set(10, 10, 5);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+            
+            const spotLight = new THREE.SpotLight(0xff6b35, 0.8);
+            spotLight.position.set(-5, 10, 5);
+            spotLight.castShadow = true;
+            scene.add(spotLight);
+            
+            // Platform
+            const platformGeometry = new THREE.CylinderGeometry(8, 8, 0.2, 32);
+            const platformMaterial = new THREE.MeshLambertMaterial({ 
+                color: 0x333333,
+                transparent: true,
+                opacity: 0.8
+            });
+            const platform = new THREE.Mesh(platformGeometry, platformMaterial);
+            platform.position.y = -1;
+            platform.receiveShadow = true;
+            scene.add(platform);
+            
+            // Platform glow effect
+            const glowGeometry = new THREE.RingGeometry(8, 8.5, 32);
+            const glowMaterial = new THREE.MeshBasicMaterial({ 
+                color: 0xff6b35,
+                transparent: true,
+                opacity: 0.3
+            });
+            const platformGlow = new THREE.Mesh(glowGeometry, glowMaterial);
+            platformGlow.rotation.x = -Math.PI / 2;
+            platformGlow.position.y = -0.9;
+            scene.add(platformGlow);
+            
+            // Mouse controls
+            setupMouseControls();
+            
+            // Handle window resize
+            window.addEventListener('resize', onWindowResize);
+        }
+        
+        // Create car geometry (simplified car shape)
+        function createCar(brand) {
+            const carGroup = new THREE.Group();
+            const data = carData[brand];
+            
+            // Car body
+            const bodyGeometry = new THREE.BoxGeometry(4, 1.5, 2);
+            const bodyMaterial = new THREE.MeshPhongMaterial({ 
+                color: data.color,
+                shininess: 100,
+                specular: 0x111111
+            });
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            body.position.y = 0;
+            body.castShadow = true;
+            carGroup.add(body);
+            
+            // Car roof
+            const roofGeometry = new THREE.BoxGeometry(2.5, 1, 1.8);
+            const roofMaterial = new THREE.MeshPhongMaterial({ 
+                color: data.color,
+                shininess: 100
+            });
+            const roof = new THREE.Mesh(roofGeometry, roofMaterial);
+            roof.position.y = 1.25;
+            roof.castShadow = true;
+            carGroup.add(roof);
+            
+            // Wheels
+            const wheelGeometry = new THREE.CylinderGeometry(0.6, 0.6, 0.3, 16);
+            const wheelMaterial = new THREE.MeshPhongMaterial({ color: 0x222222 });
+            
+            const positions = [
+                [-1.5, -0.5, 1.2],
+                [1.5, -0.5, 1.2],
+                [-1.5, -0.5, -1.2],
+                [1.5, -0.5, -1.2]
+            ];
+            
+            positions.forEach(pos => {
+                const wheel = new THREE.Mesh(wheelGeometry, wheelMaterial);
+                wheel.rotation.z = Math.PI / 2;
+                wheel.position.set(...pos);
+                wheel.castShadow = true;
+                carGroup.add(wheel);
+                
+                // Rim details
+                const rimGeometry = new THREE.CylinderGeometry(0.4, 0.4, 0.35, 8);
+                const rimMaterial = new THREE.MeshPhongMaterial({ color: 0x666666 });
+                const rim = new THREE.Mesh(rimGeometry, rimMaterial);
+                rim.rotation.z = Math.PI / 2;
+                rim.position.set(...pos);
+                carGroup.add(rim);
+            });
+            
+            // Headlights
+            const headlightGeometry = new THREE.SphereGeometry(0.3, 16, 16);
+            const headlightMaterial = new THREE.MeshPhongMaterial({ 
+                color: 0xffffff,
+                emissive: 0x444444
+            });
+            
+            const leftHeadlight = new THREE.Mesh(headlightGeometry, headlightMaterial);
+            leftHeadlight.position.set(-1.2, 0.2, 2.1);
+            carGroup.add(leftHeadlight);
+            
+            const rightHeadlight = new THREE.Mesh(headlightGeometry, headlightMaterial);
+            rightHeadlight.position.set(1.2, 0.2, 2.1);
+            carGroup.add(rightHeadlight);
+            
+            // Taillights
+            const taillightMaterial = new THREE.MeshPhongMaterial({ 
+                color: 0xff0000,
+                emissive: 0x220000
+            });
+            
+            const leftTaillight = new THREE.Mesh(headlightGeometry, taillightMaterial);
+            leftTaillight.position.set(-1.2, 0.2, -2.1);
+            leftTaillight.scale.set(0.7, 0.7, 0.7);
+            carGroup.add(leftTaillight);
+            
+            const rightTaillight = new THREE.Mesh(headlightGeometry, taillightMaterial);
+            rightTaillight.position.set(1.2, 0.2, -2.1);
+            rightTaillight.scale.set(0.7, 0.7, 0.7);
+            carGroup.add(rightTaillight);
+            
+            return carGroup;
+        }
+        
+        // Setup mouse controls
+        function setupMouseControls() {
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+            const canvas = document.getElementById('car-viewer');
+            
+            canvas.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                previousMousePosition = { x: e.clientX, y: e.clientY };
+            });
+            
+            canvas.addEventListener('mousemove', (e) => {
+                if (isDragging && car) {
+                    const deltaMove = {
+                        x: e.clientX - previousMousePosition.x,
+                        y: e.clientY - previousMousePosition.y
+                    };
+                    
+                    car.rotation.y += deltaMove.x * 0.01;
+                    car.rotation.x += deltaMove.y * 0.01;
+                    
+                    // Limit rotation
+                    car.rotation.x = Math.max(-Math.PI/4, Math.min(Math.PI/4, car.rotation.x));
+                    
+                    previousMousePosition = { x: e.clientX, y: e.clientY };
+                }
+            });
+            
+            canvas.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            
+            canvas.addEventListener('wheel', (e) => {
+                const zoom = e.deltaY * 0.01;
+                camera.position.multiplyScalar(1 + zoom * 0.1);
+                
+                // Limit zoom
+                const distance = camera.position.length();
+                if (distance < 3) camera.position.setLength(3);
+                if (distance > 20) camera.position.setLength(20);
+            });
+        }
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (car && autoRotate) {
+                car.rotation.y += 0.01;
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Open 3D viewer
+        function open3DViewer(brand) {
+            currentBrand = brand;
+            const modal = document.getElementById('viewer-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            
+            modalTitle.textContent = `${brand} 3D Viewer`;
+            modal.classList.add('active');
+            loadingSpinner.style.display = 'block';
+            
+            // Initialize if not already done
+            if (!renderer) {
+                init3DViewer();
+            }
+            
+            // Remove existing car
+            if (car) {
+                scene.remove(car);
+            }
+            
+            // Create new car
+            setTimeout(() => {
+                car = createCar(brand);
+                scene.add(car);
+                
+                // Update car info
+                updateCarInfo(brand);
+                
+                loadingSpinner.style.display = 'none';
+                animate();
+            }, 500);
+        }
+        
+        // Close 3D viewer
+        function close3DViewer() {
+            const modal = document.getElementById('viewer-modal');
+            modal.classList.remove('active');
+        }
+        
+        // Update car information
+        function updateCarInfo(brand) {
+            const data = carData[brand];
+            document.getElementById('car-name').textContent = data.name;
+            document.getElementById('car-engine').textContent = `Engine: ${data.engine}`;
+            document.getElementById('car-power').textContent = `Power: ${data.power}`;
+            document.getElementById('car-price').textContent = `Price: ${data.price}`;
+        }
+        
+        // Reset view
+        function resetView() {
+            if (car) {
+                car.rotation.set(0, 0, 0);
+                camera.position.set(5, 3, 5);
+                camera.lookAt(0, 0, 0);
+            }
+        }
+        
+        // Toggle auto rotate
+        function toggleAutoRotate() {
+            autoRotate = !autoRotate;
+        }
+        
+        // Change car color
+        function changeColor() {
+            if (car) {
+                const colors = [0xff0000, 0x0000ff, 0x00ff00, 0xffffff, 0x000000, 0xff6b35, 0xffd700, 0xc0c0c0];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                car.children.forEach(child => {
+                    if (child.material && (child.geometry.type === 'BoxGeometry')) {
+                        child.material.color.setHex(randomColor);
+                    }
+                });
+            }
+        }
+        
+        // Handle window resize
+        function onWindowResize() {
+            if (camera && renderer) {
+                const container = document.getElementById('car-viewer').parentElement;
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact about specific car
+        function contactAboutCar(carName) {
+            const interestSelect = document.getElementById('interest');
+            interestSelect.value = carName;
+            
+            // Scroll to contact form
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Focus on message field and add pre-filled text
+            setTimeout(() => {
+                const messageField = document.getElementById('message');
+                messageField.value = `Hi, I'm interested in the ${carName}. Could you please provide more details about pricing, availability, and financing options?`;
+                messageField.focus();
+            }, 1000);
+        }
+
+        // Handle form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const interest = formData.get('interest');
+            const message = formData.get('message');
+            
+            // Create email body
+            const emailBody = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}%0D%0AInterested In: ${interest}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+            
+            // Open email client
+            window.location.href = `mailto:princedevarya@gmail.com?subject=Car Inquiry from ${name}&body=${emailBody}`;
+            
+            // Show success message
+            alert('Thank you for your inquiry! Your email client will open with the pre-filled message.');
+            
+            // Reset form
+            event.target.reset();
+        }
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Add some dynamic effects
+        document.addEventListener('mousemove', (e) => {
+            const cards = document.querySelectorAll('.car-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+                } else {
+                    card.style.transform = '';
+                }
+            });
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('viewer-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'viewer-modal') {
+                close3DViewer();
+            }
+        });
+    </script>
+            
+      
+</body>
+</html>
